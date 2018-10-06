@@ -24,11 +24,11 @@ html {
 
 body {
   position: relative;
-  overflow-x: hidden;
+  // overflow-x: hidden;
 }
 
 main {
-  padding: 1rem;
+  
 }
 
 button, input, select, textarea {
@@ -52,4 +52,16 @@ svg {
 ::selection {
 	background: var(--accent-color);
 	color: var(--background-color);
+}
+
+
+.grid {
+  display: grid;
+  width: 80vw;
+}
+
+.col {
+  &.dead {
+    background-color: black;
+  }
 }

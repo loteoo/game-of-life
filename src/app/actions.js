@@ -2,47 +2,37 @@
 // Global actions 
 // ==================
 
-import {generateUUID} from './utils'
-
 // Sets the new item input value in the state
-export const setInputValue = (state, ev) => ({
+export const Evolve = (state, ev) => ({
   ...state,
-  inputValue: ev.target.value
-})
-
-// Adds a new item in the array
-// and resets the input.
-export const addItem = (state) => ({
-  inputValue: '',
-  items: state.items.concat({
-    id: generateUUID(),
-    value: state.inputValue,
-    done: false
-  })
-})
-
-// Updates the "value" attribute of an item by ID
-export const updateItem = (state, id, ev) => ({
-  ...state,
-  items:  state.items.map(item => 
-    id === item.id 
-      ? ({...item, value: ev.target.value})
-      : item
+  generation: state.generation + 1,
+  grid: state.grid.map((row, i) => 
+    row.map((col, j) => {
+      let neighbors = countNeighbors(state, i, j);
+      if (col == 0 && neighbors == 3) {
+        return 1;
+      } else if (col == 1 && (neighbors < 2 || neighbors > 3)) {
+        return 0;
+      } else {
+        return col;
+      }
+    })
   )
 })
 
-// Inverts the "done" attribute of an item by ID
-export const toggleItem = (state, id) => ({
-  ...state,
-  items:  state.items.map(item => 
-    id === item.id 
-      ? ({...item, done: !item.done})
-      : item
-  )
-})
 
-// Removes an item in the array by ID
-export const deleteItem = (state, id) => ({
-  ...state,
-  items: state.items.filter(item => id !== item.id)
-})
+
+
+
+const countNeighbors = (state, x, y) => {
+  let sum = 0;
+  for (let i = -1; i < 2; i++) {
+    for (let j = -1; j < 2; j++) {
+      let col = (x + i + state.grid[0].length) % state.grid[0].length;
+      let row = (y + j + state.grid.length) % state.grid.length;
+      sum += state.grid[col][row];
+    }
+  }
+  sum -= state.grid[x][y];
+  return sum;
+}
