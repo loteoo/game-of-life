@@ -20,15 +20,28 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
   position: relative;
-  // overflow-x: hidden;
+  overflow-x: hidden;
+  height: 100%;
 }
 
 main {
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+header {
+  position: absolute 0 0 auto 0;
+}
+
+.info {
+  position: absolute auto 0 0 0;
 }
 
 button, input, select, textarea {
@@ -41,9 +54,7 @@ button, input, select, textarea {
   }
 }
 
-img {
-  max-width: 100%;
-}
+
 
 svg {
   fill: none;
@@ -56,12 +67,13 @@ svg {
 
 
 .grid {
+  margin: 0 auto;
   display: grid;
-  width: 80vw;
+  width: 90vw;
 }
 
 .col {
   &.dead {
-    background-color: black;
+    background-color: currentColor;
   }
 }

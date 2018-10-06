@@ -10,7 +10,9 @@ const create2DArray = (cols, rows) => repeat(() => repeat(rand, cols), rows);
 
 // Initial state of the app
 export const init = {
-  grid: create2DArray(20, 20),
+  grid: create2DArray(100, 100),
+  cols: 100,
+  rows: 100,
   speed: 100,
   generation: 0
 }
